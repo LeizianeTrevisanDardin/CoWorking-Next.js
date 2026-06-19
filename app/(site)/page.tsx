@@ -20,7 +20,7 @@ export default function Home() {
         </Link>
 
         <Link href="/register">
-          <button className="space-between w-48 py-3 bg-gradient-to-r from-blue-600 to-purple-500 font-bold text-xl hover:opacity-90 transition text-white rounded-md">
+          <button className="space-between w-48 py-3 bg-gradient-to-r from-purple-600 to-blue-500 font-bold text-xl hover:opacity-90 transition text-white rounded-md">
             Sign in
           </button>
         </Link>
