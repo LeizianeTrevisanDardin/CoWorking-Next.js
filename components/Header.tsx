@@ -38,7 +38,7 @@ const handleLogout = async() => {
 
     return (
 
-        <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-sm position-sticky">
+        <nav className="flex items-center justify-between px-8 py-4 sticky top-0 bg-white z-10 shadow-sm">
             <Image src="/images/coworking.png" alt="Coworking App Logo" width={130} height={60} />
             <div>
                 <Link href="/" className="text-gray-600 hover:text-gray-800 transition-colors justify-between items-center pr-8">

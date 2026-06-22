@@ -34,9 +34,9 @@ const handleLogin = async () => {
     
 
     if(profile?.role === 'owner'){
-        router.push('/ownerDashboard')
+        router.push('/OwnerDashboard')
     } else {
-    router.push('/coworkerDashboard')
+    router.push('/CoworkerDashboard')
     }
 
 }
