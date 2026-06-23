@@ -39,6 +39,7 @@ export default function Home() {
   <>
 
     <div className="flex flex-col items-center justify-center bg-white px-4">
+
       <div className="text-center max-w-xl mx-auto pt-20 pb-10">
         <h2 className="text-2xl font-bold mb-2">Welcome to Coworking App</h2>
 
@@ -53,7 +54,7 @@ export default function Home() {
 
         <Link href="/register">
           <button className="space-between w-48 py-3 bg-gradient-to-r from-purple-600 to-blue-500 font-bold text-xl hover:opacity-90 transition text-white rounded-md">
-            Sign in
+            Sign Up
           </button>
         </Link>
                   
@@ -63,15 +64,15 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-4"> Find your room and rent today! </h2>
           <p className="text-gray-500 text-sm mb-6">Your one-stop solution for coworking spaces.</p>
         </div>
+      </div>
 
-        <div className="grid grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
           {properties.map((property) => (
             <PropertyCard key={property.id} property={property} />
             ))}
         </div>
 
       </div>  
-    </div>
     <Footer />
     </>
   );

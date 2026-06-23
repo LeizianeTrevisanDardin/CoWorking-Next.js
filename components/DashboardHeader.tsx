@@ -10,6 +10,7 @@ import {useRouter } from 'next/navigation'
 
 export default function DashboardHeader() {
 const [ profile, setProfile ] = useState<any>(null);
+const [ loaded, setLoaded ] = useState(false);
 
 const router = useRouter();
 
@@ -25,6 +26,7 @@ useEffect(() => {
         .single()
 
         setProfile(profile);
+        setLoaded(true);
     }
     loadProfile()
 }, [])
@@ -51,7 +53,7 @@ return (
         Home
       </Link>
 
-      <Link href="/ownerDashboard" className="text-gray-600 hover:text-gray-800">
+      <Link href="/OwnerDashboard" className="text-gray-600 hover:text-gray-800">
         Dashboard
       </Link>
 
@@ -66,7 +68,7 @@ return (
 
       <div className="flex items-center gap-3">
         <span className="text-gray-700">
-          {profile?.name || profile?.role}
+          {loaded ? profile?.name || profile?.role : ""}
         </span>
 
         <button

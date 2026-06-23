@@ -1,38 +1,69 @@
 'use client'
-import { useState , useEffect } from "react"
+import { useState, useEffect } from "react"
 import AddPropertyModal from "@/components/AddPropertyModal"
 import { supabase } from "@/lib/supabase";
+import { Property } from "@/app/type/properties";
 
+export default function OwnerDashboard() {
+    const [ isModalOpen, setIsModalOpen ] = useState(false);
+    const [ properties, setProperties ] = useState<any[]>([]);
+    const [ searchTerm, setSearchTerm ] = useState('');
+    const [ editProperty, setEditProperty ] = useState<Property | null>(null);
 
+    const filteredProperties = properties.filter((property) =>
+        property.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
-export default function OwnerDashboard () {
-    const [ isModalOpen, setIsModalOpen] = useState(false);
-    const [ properties, setProperties] = useState<any[]>([]);
-
-
-    const loadProperties = async() => {
-        const { data: {user}}  = await supabase.auth.getUser();
-
+    // function separated just for the modal to use it after saving it
+    const handleSaved = async () => {
+        const { data: { user } } = await supabase.auth.getUser();
         if (!user) return;
 
         const { data, error } = await supabase
-        .from("properties")
-        .select("*")
-        .eq("owner_id", user.id)
-        .order("created_at", {ascending: false})
-        .limit(10);  
-        
-        if(error){
-            console.error(error)
-        return;
+            .from("properties")
+            .select("*")
+            .eq("owner_id", user.id)
+            .order("created_at", { ascending: false })
+            .limit(10);
+
+        if (error) {
+            console.error(error);
+            return;
         }
-        
 
         setProperties(data || []);
+    };
 
+    const handleDelete = async (id: string) => {
+        const { error } = await supabase
+            .from("properties")
+            .delete()
+            .eq("id", id);
+
+        if (error) {
+            console.error("Delete error:", error.message);
+            return;
+        }
+    setProperties((prev) => prev.filter((p) => p.id !== id));
     };
 
     useEffect(() => {
+        // function declared inside because of Eslint
+        const loadProperties = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) return;
+
+            const { data, error } = await supabase
+                .from("properties")
+                .select("*")
+                .eq("owner_id", user.id)
+                .order("created_at", { ascending: false })
+                .limit(10);
+
+            if (error) { console.error(error); return; }
+            setProperties(data || []);
+        };
+
         loadProperties();
     }, []);
 
@@ -44,15 +75,24 @@ export default function OwnerDashboard () {
             <h1 className="text-3xl font-bold">Owner Dashboard</h1>
 
             <div className="border border-gray-200 rounded-md p-2 mt-10 mb-10 text-gray-500 shadow-sm">
-                search filter
+                <input
+                type="text"
+                placeholder="Search by name"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                autoComplete="off"
+                className="w-full outline-none text-gray-500">
+                </input>
             </div>
 
             <div className="mt-8 space-y-4">
-                {properties.map((property) => (
+                {filteredProperties.map((property) => (
                     <div
-                        key={property.id}
-                        className="flex justify-between items-center border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition"
-                        >
+                      
+    key={property.id}
+    className="flex justify-between items-center p-4 shadow-sm hover:shadow-md transition"
+>
+                 
                             <div>
                                 <h3 className="font-semibold">{property.name}</h3>
                                 <p className="text-sm text-gray-500">
@@ -61,12 +101,19 @@ export default function OwnerDashboard () {
                             </div>
 
                             <div className="flex gap-2">
-                            <button className="px-3 py-1  rounded border">
+                            <button 
+                                type="button"
+                                onClick={() => setEditProperty(property)}
+                            className="px-3 py-1  rounded border">
                                 Edit
                             </button>
 
-                            <button className="px-3 py-1  rounded border">
-                                Delete
+                            <button 
+                            type="button"
+                            onClick={() => {handleDelete(property.id);}}
+                            className="px-3 py-1 rounded border text-red-500 border-red-300"
+                            >
+                            Delete
                             </button>
                         </div>
                         </div>
@@ -83,9 +130,15 @@ export default function OwnerDashboard () {
 
                     {isModalOpen && (<AddPropertyModal 
                         onClose={() => setIsModalOpen(false)}
-                        onSaved={loadProperties}
+                        onSaved={handleSaved}
                         />
                     )}
+
+                    {editProperty && (<AddPropertyModal
+                        onClose={() => setEditProperty(null)}
+                        onSaved={handleSaved}
+                        property={editProperty}
+                    />)}
                     </div>
         </section>
     </>

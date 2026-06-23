@@ -2,77 +2,74 @@
 
 import { useState } from "react"
 import { supabase } from "@/lib/supabase"
+import { Property } from "@/app/type/properties"
 
 
 type AddPropertyModalProps ={
     onClose: () => void;
     onSaved: () => void;
+    property?: Property;
 };
 
-export default function AddPropertyModal( { onClose, onSaved} : AddPropertyModalProps){
-    const [ name, setName ] = useState("");
-    const [ description, setDescription ] = useState("");
+export default function AddPropertyModal( { onClose, onSaved, property} : AddPropertyModalProps){
+    const [ name, setName ] = useState(property?.name ?? "");
+    const [ description, setDescription ] = useState(property?.description ?? "");
     const [ imageFile, setImageFile] = useState<File | null>(null);
     const [ loading, setLoading] = useState(false);
     const [ successMessage, setSuccessMessage] = useState("");
 
-    const handleSubmit = async() => {
-        setLoading(true);
+    const handleSubmit = async () => {
+    setLoading(true);
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { setLoading(false); return; }
 
-    const { data: {user} } = await supabase.auth.getUser();
+    let image_url = property?.image_url ?? ""; // mantém a imagem antiga se não trocar
 
-    if(!user || !imageFile){
-        setLoading(false);
-        return;
+    // só faz upload se escolheu nova imagem
+    if (imageFile) {
+        const fileExt = imageFile.name.split(".").pop();
+        const fileName = `${user.id}-${Date.now()}.${fileExt}`;
+
+        const { error: uploadError } = await supabase.storage
+            .from("property-images")
+            .upload(fileName, imageFile);
+
+        if (uploadError) { console.error(uploadError); setLoading(false); return; }
+
+        const { data: urlData } = supabase.storage
+            .from("property-images")
+            .getPublicUrl(fileName);
+
+        image_url = urlData.publicUrl;
     }
 
-    const fileExt = imageFile?.name.split(".").pop();
-    const fileName = `${user.id} - ${Date.now()}.${fileExt}`;
+    if (property) {
+      
+        const { error } = await supabase
+            .from("properties")
+            .update({ name, description, image_url })
+            .eq("id", property.id);
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
-    .from("property-images")
-    .upload(fileName, imageFile);
+            console.log("update error:", error); 
+    console.log("update id:", property.id); 
 
-    if(uploadError){
-        console.error(uploadError);
-        setLoading(false);
-        return;
+        if (error) { console.error(error); setLoading(false); return; }
+    } else {
+        
+        if (!imageFile) { setLoading(false); return; }
+
+        const { error } = await supabase
+            .from("properties")
+            .insert({ owner_id: user.id, name, description, image_url });
+
+        if (error) { console.error(error); setLoading(false); return; }
     }
 
-    const { data: urlData } = supabase.storage
-    .from("property-images")
-    .getPublicUrl(fileName);
-    
-
-    const { error:  insertError} = await supabase
-    .from("properties")
-    .insert({
-        owner_id: user.id,
-        name: name,
-        description: description,
-        image_url: urlData.publicUrl,
-    });
-
-
-    if(insertError){
-        console.error(insertError);
-        setLoading(false);
-        return;
-    }
-
-    setName("");
-    setDescription("");
-    setImageFile(null);
     setSuccessMessage("Property saved successfully!");
     onSaved();
     setLoading(false);
-
-    //to close modal automatically
-    setTimeout(() => {
-        onClose();
-    }, 1000);
-    
-}
+    setTimeout(() => onClose(), 1000);
+};
 
 return (
    <div className="fixed inset-0 bg-black/50 flex items-center justify-center text-gray-900 z-[9999]">
@@ -82,7 +79,9 @@ return (
             X
         </button>
 
-        <h2 className="text-xl font-bold mb-4">Add Property</h2>
+        <h2 className="text-xl font-bold mb-4">
+            {property? "Edit Property" : "Add Property"}
+        </h2>
      
         {successMessage && (
             <p className="text-gray-900 text-sm mb-4">
@@ -113,7 +112,6 @@ return (
 
             <button onClick={handleSubmit} disabled={loading}
             className="w-full py-2 rounded px-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:from-blue-600 hover:to-purple-700 transition-colors mt-5">
-
                 {loading ? "Saving" : "Save Property" }
             </button>
 
