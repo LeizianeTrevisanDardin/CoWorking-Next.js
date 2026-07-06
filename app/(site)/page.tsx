@@ -66,7 +66,7 @@ export default function Home() {
         </div>
       </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 max-w-5xl mx-auto px-4">
           {properties.map((property) => (
             <PropertyCard key={property.id} property={property} />
             ))}

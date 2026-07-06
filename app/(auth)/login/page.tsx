@@ -11,33 +11,45 @@ export default function LoginPage() {
 const router = useRouter();
 
 const handleLogin = async () => {
-    if(!email || !password) {
-        alert('Fields are required')
-        return
-    }
+  if (!email || !password) {
+    alert("Fields are required");
+    return;
+  }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-    })
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
-    if(error){
-        alert(error.message)
-        return
-    }
+  if (error) {
+    alert(error.message);
+    return;
+  }
 
-    const { data: profile } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', data.user?.id)
-        .single()
-    
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", data.user.id)
+    .maybeSingle();
 
-    if(profile?.role === 'owner'){
-        router.push('/OwnerDashboard')
-    } else {
-    router.push('/CoworkerDashboard')
-    }
+  if (profileError) {
+    console.error(profileError);
+    alert("Error loading profile.");
+    return;
+  }
+
+  if (!profile) {
+    alert("Profile not found for this user.");
+    return;
+  }
+
+  if (profile.role === "owner") {
+    router.push("/OwnerDashboard");
+  } else if (profile.role === "coworker") {
+    router.push("/CoworkerDashboard");
+  } else {
+    alert("Invalid user role.");
+  }
 
 }
     return (
