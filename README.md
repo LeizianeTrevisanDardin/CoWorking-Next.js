@@ -4,6 +4,8 @@ A modern coworking platform built with **Next.js 16**, **TypeScript**, **Supabas
 
 Users can browse workspaces, rent offices, contact owners with AI assistance, and securely complete payments through Stripe Checkout.
 
+Figma inspiration: College's assignment group project: https://www.figma.com/design/qzqipjJdeGB8L45dBNT9ON/CoWorking-Project?node-id=12-790&t=g8IGcPim4mM6Krxl-1
+
 ---
 
 ##  Live Demo
