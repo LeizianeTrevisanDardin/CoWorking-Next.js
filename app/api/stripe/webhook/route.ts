@@ -48,38 +48,75 @@ async function completeRental(
     );
   }
 
-  const amount = Number(
-    session.amount_total || 0
-  ) / 100;
+  const amount =
+    Number(session.amount_total || 0) / 100;
 
-  if (!Number.isFinite(amount) || amount <= 0) {
+  if (
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ) {
     throw new Error(
       `Invalid amount for Stripe session ${session.id}.`
     );
   }
 
-  const { data, error } =
-    await supabaseAdmin.rpc(
-      "complete_workspace_rental",
-      {
-        p_workspace_id: workspaceId,
-        p_coworker_id: coworkerId,
-        p_owner_id: ownerId,
-        p_amount: amount,
-        p_stripe_session_id:
-          session.id,
-      }
-    );
+  /*
+   * Cria ou registra o aluguel no Supabase.
+   */
+  const {
+    data: rentalData,
+    error: rentalError,
+  } = await supabaseAdmin.rpc(
+    "complete_workspace_rental",
+    {
+      p_workspace_id: workspaceId,
+      p_coworker_id: coworkerId,
+      p_owner_id: ownerId,
+      p_amount: amount,
+      p_stripe_session_id:
+        session.id,
+    }
+  );
 
-  if (error) {
+  if (rentalError) {
     throw new Error(
-      `Unable to complete rental: ${error.message}`
+      `Unable to complete rental: ${rentalError.message}`
+    );
+  }
+
+  /*
+   * Marca o workspace como indisponível
+   * depois do pagamento aprovado.
+   */
+  const {
+    data: updatedWorkspace,
+    error: workspaceUpdateError,
+  } = await supabaseAdmin
+    .from("workspaces")
+    .update({
+      is_available: false,
+    })
+    .eq("id", workspaceId)
+    .select("id, title, is_available")
+    .single();
+
+  if (workspaceUpdateError) {
+    throw new Error(
+      `Unable to mark workspace unavailable: ${workspaceUpdateError.message}`
     );
   }
 
   console.log(
-    "Rental completed:",
-    data
+    "Rental completed successfully:",
+    {
+      stripeSessionId: session.id,
+      workspaceId,
+      coworkerId,
+      ownerId,
+      amount,
+      rentalData,
+      updatedWorkspace,
+    }
   );
 }
 
@@ -120,9 +157,12 @@ export async function POST(
   }
 
   try {
-    // O Stripe precisa do corpo original,
-    // sem JSON.parse antes da validação.
-    const rawBody = await request.text();
+    /*
+     * O Stripe precisa do corpo original
+     * para validar a assinatura.
+     */
+    const rawBody =
+      await request.text();
 
     const event =
       stripe.webhooks.constructEvent(
@@ -138,6 +178,7 @@ export async function POST(
             .object as Stripe.Checkout.Session;
 
         await completeRental(session);
+
         break;
       }
 
@@ -147,13 +188,15 @@ export async function POST(
             .object as Stripe.Checkout.Session;
 
         await completeRental(session);
+
         break;
       }
 
-      default:
+      default: {
         console.log(
           `Unhandled Stripe event: ${event.type}`
         );
+      }
     }
 
     return NextResponse.json({
