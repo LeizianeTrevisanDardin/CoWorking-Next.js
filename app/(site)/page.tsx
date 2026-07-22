@@ -9,7 +9,7 @@ import { Property } from "@/app/types/property"
 import PropertyCard from "@/components/PropertyCard";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = false;
 
 export default function Home() {
 
