@@ -12,33 +12,37 @@ Users can browse workspaces, rent offices, contact owners with AI assistance, an
 
 ---
 
-##  Screenshots
+# 📸 Screenshots
 
+## 🏠 Homepage
 
-### Home
-
-![Home](docs/hompage.png)
-
----
-
-### Coworker Dashboard
-
-![Coworker Dashboard](docs/coworker-dashboard.png)
+![Homepage](public/screenshots/homepage.png)
 
 ---
 
-### Workspace Details
+## 🔐 Login
 
-![Workspace Details](docs/workspace-details.png)
+![Login](public/screenshots/login.png)
 
 ---
 
-### Owner Dashboard
+## 📝 Register
 
-![Owner Dashboard](docs/owner-dashboard.png)
+![Register](public/screenshots/register.png)
+
 ---
 
-# ✨ Features
+## 👤 Owner Dashboard
+
+![Owner Dashboard](public/screenshots/owner-dashboard.png)
+
+---
+
+## 💼 Coworker Dashboard
+
+![Coworker Dashboard](public/screenshots/coworker-dashboard.png)
+
+# Features
 
 ## Authentication
 
@@ -110,7 +114,7 @@ The assistant:
 
 ---
 
-## 💳 Stripe Integration
+##  Stripe Integration
 
 - Stripe Checkout
 - Payment Success Page
@@ -118,7 +122,7 @@ The assistant:
 
 ---
 
-## 📧 Email
+##  Email
 
 Integrated with **Resend**
 
@@ -130,7 +134,7 @@ Automatically sends:
 
 ---
 
-## ☁️ Storage
+##  Storage
 
 Supabase Storage
 
@@ -140,7 +144,7 @@ Supabase Storage
 
 ---
 
-# 🛠 Tech Stack
+#  Tech Stack
 
 ### Frontend
 
@@ -177,7 +181,7 @@ Supabase Storage
 
 ---
 
-# 📂 Project Structure
+#  Project Structure
 
 ```
 app/
