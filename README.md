@@ -1,4 +1,4 @@
-# 🏢 Coworking App
+# Coworking App
 
 A modern coworking platform built with **Next.js 16**, **TypeScript**, **Supabase**, **Stripe**, and **OpenRouter AI**.
 
@@ -8,15 +8,16 @@ Users can browse workspaces, rent offices, contact owners with AI assistance, an
 
 ##  Live Demo
 
-🌐 https://co-working-next-js.vercel.app
+https://co-working-next-js.vercel.app
 
 ---
 
-# 📸 Screenshots
+# Screenshots
 
 ##  Homepage
 
 ![Homepage](public/screenshots/homepage.png)
+![Homepage](public/screenshots/properties.png)
 
 ---
 
@@ -35,14 +36,15 @@ Users can browse workspaces, rent offices, contact owners with AI assistance, an
 ## Owner Dashboard
 
 ![Owner Dashboard](public/screenshots/owner-dashboard.png)
+![Owner Dashboard](public/screenshots/workspaces.png)
 
 ---
 
 ##  Coworker Dashboard
 
 ![Coworker Dashboard](public/screenshots/coworker-dashboard.png)
+![Coworker Dashboard](public/screenshots/rent.png)
 
-# Features
 
 ## Authentication
 
@@ -100,7 +102,7 @@ Coworkers can:
 
 ---
 
-## 🤖 AI Assistant
+##  AI Assistant
 
 Integrated with **OpenRouter AI**.
 
@@ -112,6 +114,10 @@ The assistant:
 - Saves the conversation
 - Emails the owner automatically
 
+![Coworker Dashboard](public/screenshots/aichat.png)
+![Coworker Dashboard](public/screenshots/aichatanswered.png)
+![Coworker Dashboard](public/screenshots/aichat.png)
+
 ---
 
 ##  Stripe Integration
@@ -119,6 +125,15 @@ The assistant:
 - Stripe Checkout
 - Payment Success Page
 - Payment Cancelled Page
+
+![Coworker Dashboard](public/screenshots/payment.png)
+
+![Coworker Dashboard](public/screenshots/paymentprocess.png)
+
+![Coworker Dashboard](public/screenshots/paymentsuccessful.png)
+
+![Coworker Dashboard](public/screenshots/paymentcancelled.png)
+
 
 ---
 
@@ -131,6 +146,8 @@ Automatically sends:
 - AI-generated inquiry
 - Customer information
 - Workspace information
+
+![Coworker Dashboard](public/screenshots/resendfeature.png)
 
 ---
 
