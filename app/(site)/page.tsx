@@ -1,6 +1,5 @@
-'use client'
+"use client";
 
-import Image from "next/image";
 import Footer from "@/components/Footer";
 import Link from "next/link"
 import { useState, useEffect } from "react"
@@ -8,8 +7,8 @@ import { supabase } from "@/lib/supabase"
 import { Property } from "@/app/types/property"
 import PropertyCard from "@/components/PropertyCard";
 
-export const dynamic = "force-dynamic";
-export const revalidate = false;
+// export const dynamic = "force-dynamic";
+// export const revalidate = 0;
 
 export default function Home() {
 
