@@ -45,7 +45,7 @@ const handleLogout = async() => {
                     Home
                 </Link>
 
-                <Link href="/whyChooseUs" className="text-gray-600 hover:text-gray-800 transition-colors pr-8">
+                <Link href="/why-choose-us" className="text-gray-600 hover:text-gray-800 transition-colors pr-8">
                     Why Choose us?
                 </Link>
 

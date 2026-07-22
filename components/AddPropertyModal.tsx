@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { supabase } from "@/lib/supabase"
-import { Property } from "@/app/type/properties"
+import { Property } from "@/app/types/property"
 
 type AddPropertyModalProps ={
     onClose: () => void;

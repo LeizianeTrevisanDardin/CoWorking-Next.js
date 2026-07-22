@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import { supabase } from "@/lib/supabase"
-import { Property } from "@/app/types/properties"
+import { Property } from "@/app/types/property"
 import PropertyCard from "@/components/PropertyCard";
 
 export default function Home() {
