@@ -149,7 +149,7 @@ Automatically sends:
 
 ![Coworker Dashboard](public/screenshots/resendfeature.png)
 
-![Coworker Dashboard](public/screenshots/summaryemailed.png)
+![Coworker Dashboard](public/screenshots/emailreceived.png)
 
 
 ---
