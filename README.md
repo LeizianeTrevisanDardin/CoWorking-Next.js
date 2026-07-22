@@ -130,7 +130,7 @@ The assistant:
 
 ![Coworker Dashboard](public/screenshots/paymentprocess.png)
 
-![Coworker Dashboard](public/screenshots/paymentsuccessful.png)
+![Coworker Dashboard](public/screenshots/paymentcomplete.png)
 
 ![Coworker Dashboard](public/screenshots/paymentcancelled.png)
 
