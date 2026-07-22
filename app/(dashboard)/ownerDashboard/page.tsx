@@ -17,6 +17,7 @@ type Workspace = {
   smoking_allowed: boolean;
   available_date: string | null;
   price: number;
+  image_url: string | null;
   is_available: boolean;
   created_at: string;
 };
