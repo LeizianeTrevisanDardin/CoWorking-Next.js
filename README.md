@@ -14,31 +14,31 @@ Users can browse workspaces, rent offices, contact owners with AI assistance, an
 
 # 📸 Screenshots
 
-## 🏠 Homepage
+##  Homepage
 
 ![Homepage](public/screenshots/homepage.png)
 
 ---
 
-## 🔐 Login
+## Login
 
 ![Login](public/screenshots/login.png)
 
 ---
 
-## 📝 Register
+## Register
 
 ![Register](public/screenshots/register.png)
 
 ---
 
-## 👤 Owner Dashboard
+## Owner Dashboard
 
 ![Owner Dashboard](public/screenshots/owner-dashboard.png)
 
 ---
 
-## 💼 Coworker Dashboard
+##  Coworker Dashboard
 
 ![Coworker Dashboard](public/screenshots/coworker-dashboard.png)
 
@@ -243,8 +243,8 @@ RESEND_API_KEY=
 
 # Future Improvements
 
-- ⭐ Reviews
-- ❤️ Favorites
+- Reviews
+- Favorites
 - Google Maps
 - Availability Calendar
 - Notifications
@@ -264,7 +264,7 @@ Software Developer
 🇨🇦 Based in Calgary, Alberta
 
 GitHub:
-[https://github.com/LeizianeTrevisanDardin]
+https://github.com/LeizianeTrevisanDardin
 
 LinkedIn:
 www.linkedin.com/in/leiziane-trevisan-dardin
