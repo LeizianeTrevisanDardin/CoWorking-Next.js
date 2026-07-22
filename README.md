@@ -264,10 +264,10 @@ Software Developer
 🇨🇦 Based in Calgary, Alberta
 
 GitHub:
-https://github.com/YOUR_USERNAME
+[https://github.com/LeizianeTrevisanDardin]
 
 LinkedIn:
-https://linkedin.com/in/YOUR_PROFILE
+www.linkedin.com/in/leiziane-trevisan-dardin
 
 ---
 
