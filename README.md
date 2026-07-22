@@ -1,36 +1,272 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏢 Coworking App
 
-## Getting Started
+A modern coworking platform built with **Next.js 16**, **TypeScript**, **Supabase**, **Stripe**, and **OpenRouter AI**.
 
-First, run the development server:
+Users can browse workspaces, rent offices, contact owners with AI assistance, and securely complete payments through Stripe Checkout.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+##  Live Demo
+
+🌐 https://co-working-next-js.vercel.app
+
+---
+
+##  Screenshots
+
+
+### Home
+
+![Home](docs/hompage.png)
+
+---
+
+### Coworker Dashboard
+
+![Coworker Dashboard](docs/coworker-dashboard.png)
+
+---
+
+### Workspace Details
+
+![Workspace Details](docs/workspace-details.png)
+
+---
+
+### Owner Dashboard
+
+![Owner Dashboard](docs/owner-dashboard.png)
+---
+
+# ✨ Features
+
+## Authentication
+
+- User Registration
+- Login / Logout
+- Protected Routes
+- Session Management
+
+---
+
+## Property Management
+
+Owners can:
+
+- Create properties
+- Edit properties
+- Delete properties
+- Upload images
+- View all owned properties
+
+---
+
+## Workspace Management
+
+Owners can:
+
+- Create workspaces
+- Edit workspaces
+- Delete workspaces
+- Mark workspace as available/unavailable
+- Upload workspace images
+
+---
+
+## Coworker Features
+
+Coworkers can:
+
+- Browse available workspaces
+- Filter by:
+
+  - Address
+  - Neighborhood
+  - Price
+  - Seats
+  - Lease Term
+  - Parking
+  - Public Transportation
+  - Smoking Allowed
+  - Available Date
+
+- View workspace details
+- Contact workspace owners
+- Complete secure Stripe payments
+
+---
+
+## 🤖 AI Assistant
+
+Integrated with **OpenRouter AI**.
+
+The assistant:
+
+- Guides users before contacting an owner
+- Collects user needs
+- Generates an AI summary
+- Saves the conversation
+- Emails the owner automatically
+
+---
+
+## 💳 Stripe Integration
+
+- Stripe Checkout
+- Payment Success Page
+- Payment Cancelled Page
+
+---
+
+## 📧 Email
+
+Integrated with **Resend**
+
+Automatically sends:
+
+- AI-generated inquiry
+- Customer information
+- Workspace information
+
+---
+
+## ☁️ Storage
+
+Supabase Storage
+
+- Private bucket
+- Signed URLs
+- Secure image uploads
+
+---
+
+# 🛠 Tech Stack
+
+### Frontend
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+
+### Backend
+
+- Supabase
+- PostgreSQL
+- Row Level Security (RLS)
+
+### Authentication
+
+- Supabase Auth
+
+### Payments
+
+- Stripe
+
+### AI
+
+- OpenRouter
+
+### Email
+
+- Resend
+
+### Deployment
+
+- Vercel
+
+---
+
+# 📂 Project Structure
+
+```
+app/
+components/
+lib/
+types/
+public/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Main tables:
 
-## Learn More
+- profiles
+- properties
+- workspaces
+- rentals
+- workspace_conversations
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+git clone https://github.com/yourusername/coworking-app.git
 
-## Deploy on Vercel
+cd coworking-app
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+npm install
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm run dev
+```
+
+---
+
+# Environment Variables
+
+Create a `.env.local`
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+SUPABASE_SERVICE_ROLE_KEY=
+
+STRIPE_SECRET_KEY=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+
+STRIPE_WEBHOOK_SECRET=
+
+OPENROUTER_API_KEY=
+
+RESEND_API_KEY=
+```
+
+---
+
+# Future Improvements
+
+- ⭐ Reviews
+- ❤️ Favorites
+- Google Maps
+- Availability Calendar
+- Notifications
+- Owner Analytics
+- Admin Dashboard
+- Chat between users
+
+---
+
+# Author
+
+**Leiziane Trevisan Dardin**
+
+Software Developer
+
+🇧🇷 Brazilian
+🇨🇦 Based in Calgary, Alberta
+
+GitHub:
+https://github.com/YOUR_USERNAME
+
+LinkedIn:
+https://linkedin.com/in/YOUR_PROFILE
+
+---
+
+# License
+
+MIT License
